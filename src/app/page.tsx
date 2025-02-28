@@ -1,8 +1,32 @@
+"use client";
+// import { useEffect } from "react";
 import Image from "next/image";
+// import { trpc } from "@/hooks/trpc";
+import { trpc } from '@/utils/trpc';
 
 export default function Home() {
+  const { data: restaurants } = trpc.restaurant.getRestaurants.useQuery();
+
+  const { data, isLoading } = trpc.hello.useQuery({ name: 'Next.js 15' });
+
+  console.log(data, 'response data');
+
+  if (isLoading) return <p>Loading...</p>;
+
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+
+    <ul>
+      <li>Restaurant Lists:</li>
+      {restaurants?.map((restaurant: { id: string; name: string }) => (
+        <li key={restaurant.id}>{restaurant.name}</li>
+      ))}
+    </ul>
+
+    <h1>{data?.message}</h1>
+
+
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
