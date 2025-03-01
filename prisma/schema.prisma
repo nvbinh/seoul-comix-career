@@ -8,10 +8,55 @@ datasource db {
 }
 
 model Restaurant {
-  id          String @id @default(cuid())
-  name        String
-  description String
-  rating      Float
-  image       String
-  favorites   Int    @default(0)
+  id           String   @id @default(cuid())
+  name         String
+  desc         String
+  rating       Float
+  rating_count Int
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  city         String
+  images       String[]
+  price_range  String
+  featuredId   String?
+  featured     Featured? @relation(fields: [featuredId], references: [id])
+  isFavorite   Boolean
+}
+
+model Featured {
+  id           String   @id @default(cuid())
+  text         String
+  icon         String
+  restaurants  Restaurant[]  // Add back relation to Restaurant
+}
+
+model Category {
+  id           String   @id @default(cuid())
+  value        StoreCategory
+  text         String
+  restaurants  Restaurant[]  // Add back relation to Restaurant
+}
+
+enum StoreCategory {
+  SUSHI
+  UNAGI
+  TEMPURA
+  TONKATSU
+  YAKITORI
+  SUKIYAKI
+  SOBA
+  RAMEN
+  YAKISOBA
+  OKONOMIYAKI
+  DONBURI
+  ODEN
+  KAISEKI
+  HAMBAGU
+  TEPPANYAKI
+  CURRY
+  YAKINIKU
+  NABE
+  CAFE
+  IZAKAYA
+  OTHER
 }
