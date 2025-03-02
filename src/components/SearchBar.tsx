@@ -25,8 +25,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchName }) => {
   }, [inputValue, setSearchName]);
 
   return (
-    <div className="p-4 w-full">
-      <div className="flex items-center bg-gray-100 rounded-full p-3 w-full">
+    <div className="py-4">
+      <div className="flex items-center bg-gray-100 rounded-full p-3">
         <svg
           className="w-5 h-5 text-gray-500"
           xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchName }) => {
         <input
           type="text"
           placeholder="맛집 이름을 검색해보세요"
-          className="ml-3 bg-transparent outline-none w-full"
+          className="ml-3 bg-transparent outline-none"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />

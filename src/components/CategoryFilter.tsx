@@ -14,7 +14,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ selectedCategory, setSe
   ];
 
   return (
-    <div className="flex px-4 justify-between w-full overflow-x-auto">
+    <div className="flex justify-between overflow-x-auto">
       {categories.map((category) => (
         <button
           key={category.value}
