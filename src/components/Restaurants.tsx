@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 import ImageSlider from "@/components/ImageSlider";
-import { useQueryClient } from "@tanstack/react-query";
 interface RestaurantProps {
   id: string;
   name: string;
@@ -27,7 +26,6 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
     null
   );
   const [isLoading, setIsLoading] = useState(false);
-  const queryClient = useQueryClient();
 
   const { data, isLoading: queryLoading, refetch } =
     trpc.restaurant.getRestaurants.useQuery({

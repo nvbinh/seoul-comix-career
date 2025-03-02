@@ -9,7 +9,7 @@ const handler = (req: Request) => {
     endpoint: '/api/trpc',
     req,
     router: appRouter,
-    createContext: () => createContext(req),
+    createContext: () => createContext(),
     responseMeta: () => ({
       headers: {
         'Content-Type': 'application/json',
