@@ -36,25 +36,27 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Project Structure
+<pre>
 seoul-comix/
-│── prisma/                 # Prisma configuration
-│   ├── migrations/         # Database migrations
-│   ├── schema.prisma       # Prisma schema file
-│── src/                    # Main source code
-│   ├── components/         # Reusable React components
-│   ├── hooks/              # Custom React hooks
-│   ├── app/                # Next.js app
-│   │   ├── api/            # API routes (for tRPC)
-│   │   ├── index.tsx       # Home page (restaurant list)
-│   ├── server/             # Backend logic
-│   │   ├── trpc/           # tRPC API handlers
-│   │   │   ├── context.ts  # tRPC context (authentication, etc.)
-│   │   │   ├── router.ts   # Main tRPC router
+│── prisma/                   # Prisma configuration
+│   ├── migrations/           # Database migrations
+│   ├── schema.prisma         # Prisma schema file
+│── src/                      # Main source code
+│   ├── components/           # Reusable React components
+│   ├── hooks/                # Custom React hooks
+│   ├── app/                  # Next.js app
+│   │   ├── api/              # API routes (for tRPC)
+│   │   ├── index.tsx         # Home page (restaurant list)
+│   ├── server/               # Backend logic
+│   │   ├── trpc/             # tRPC API handlers
+│   │   │   ├── context.ts    # tRPC context (authentication, etc.)
+│   │   │   ├── router.ts     # Main tRPC router
 │   │   │   ├── restaurant.ts # Restaurant API handlers
-│   ├── styles/             # Global styles (CSS, Tailwind, etc.)
-│   ├── utils/              # Utility functions/helpers
-│── public/                 # Static assets (images, icons, etc.)
-│── .env                    # Environment variables (DB connection)
-│── package.json            # Dependencies and scripts
-│── next.config.js          # Next.js configuration
-│── tsconfig.json           # TypeScript configuration
+│   ├── styles/               # Global styles (CSS, Tailwind, etc.)
+│   ├── utils/                # Utility functions/helpers
+│── public/                   # Static assets (images, icons, etc.)
+│── .env                      # Environment variables (DB connection)
+│── package.json              # Dependencies and scripts
+│── next.config.js            # Next.js configuration
+│── tsconfig.json             # TypeScript configuration
+</pre>

@@ -2,7 +2,7 @@ import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 import { createContext } from '@/server/trpc/context';
 import { appRouter } from '@/server/trpc/router';
 
-export const runtime = 'nodejs'; // Enable Edge runtime for better performance
+export const runtime = 'nodejs'; // TODO: Enable Edge runtime for requirements
 
 const handler = (req: Request) => {
   return fetchRequestHandler({
