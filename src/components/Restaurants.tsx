@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 import ImageSlider from "@/components/ImageSlider";
-
+import { useQueryClient } from "@tanstack/react-query";
 interface RestaurantProps {
   id: string;
   name: string;
@@ -27,11 +27,19 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
     null
   );
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
-  const { data, isLoading: queryLoading } =
-    trpc.restaurant.getRestaurants.useQuery(
-      { ...(category ? { categoryValue: category } : {}), name }
-    );
+  const { data, isLoading: queryLoading, refetch } =
+    trpc.restaurant.getRestaurants.useQuery({
+      ...(category ? { categoryValue: category } : {}),
+      name,
+    });
+
+  const addFavoriteMutation = trpc.restaurant.addFavorite.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   useEffect(() => {
     if (!queryLoading) {
@@ -41,6 +49,10 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
   }, [data, queryLoading]);
 
   if (isLoading) return <p>Loading...</p>;
+
+  const handleAddFavorite = (id: string) => {
+    addFavoriteMutation.mutate(id);
+  };
 
   return restaurants?.map((res) => (
     <div key={res.id} className="py-4">
@@ -56,7 +68,10 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
           />
         )}
         {res.images.length > 1 && <ImageSlider images={res.images} />}
-        <button className="absolute top-4 right-4 bg-gray-600 bg-opacity-50 rounded-full text-white font-bold p-2 shadow-md">
+        <button
+          className={`absolute top-4 right-4 bg-opacity-50 rounded-full text-white font-bold p-2 shadow-md ${res.isFavorite ? "bg-red-500" : "bg-gray-500"}`}
+          onClick={() => handleAddFavorite(res.id)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -82,7 +97,9 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
             나카노시마×야키토리 상위 맛집
           </h2>
           <div className="flex items-center justify-between">
-            <h1 className="text-lg font-semibold max-w-xs truncate ...">{res.name}</h1>
+            <h1 className="text-lg font-semibold max-w-xs truncate ...">
+              {res.name}
+            </h1>
             <span className="text-sm flex gap-1 items-center w-21">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +114,9 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
               {res.rating} ({res.rating_count})
             </span>
           </div>
-          <p className="text-gray-500 text-sm max-w-xs truncate ...">{res.desc}</p>
+          <p className="text-gray-500 text-sm max-w-xs truncate ...">
+            {res.desc}
+          </p>
           <div className="mt-2 text-gray-500 text-sm">
             오사카 나카노시마 · 야키토리 · {res.price_range}만원
           </div>
