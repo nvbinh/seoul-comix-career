@@ -68,8 +68,8 @@ async function main() {
         "desc": "최고급 오마카세를 합리적인 가격에 무제한 사케와 함께 즐길 수 있는",
         "images": [
             "https://picsum.photos/seed/picsum/400/300",
-            "https://picsum.photos/seed/picsum/400/300",
-            "https://picsum.photos/seed/picsum/400/300"
+            "https://picsum.photos/id/237/400/300",
+            "https://picsum.photos/id/1/400/300"
         ],
         "name": "카구라자카 이시카와 스시하루 나카노시마 스시야 카구라자카 이시카와 스시하루 나카노시마 스시야",
         "price_range": "3~5",
@@ -83,9 +83,7 @@ async function main() {
         "city": "tokyo",
         "desc": "신선한 해산물과 정통 스시를 제공하는",
         "images": [
-            "https://picsum.photos/seed/picsum/400/300",
-            "https://picsum.photos/seed/picsum/400/300",
-            "https://picsum.photos/seed/picsum/400/300"
+            "https://picsum.photos/id/237/400/300",
         ],
         "name": "스시 긴자 이시카와",
         "price_range": "4~6",
@@ -99,7 +97,6 @@ async function main() {
         "city": "kyoto",
         "desc": "진한 국물과 다양한 토핑을 자랑하는",
         "images": [
-            "https://picsum.photos/seed/picsum/400/300",
             "https://picsum.photos/seed/picsum/400/300",
             "https://picsum.photos/seed/picsum/400/300"
         ],
