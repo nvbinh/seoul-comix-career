@@ -24,13 +24,24 @@ export const restaurantRouter = router({
         category: true,
         featured: true,
       },
+      orderBy: {
+        name: 'asc', // Order by name in ascending order
+      },
     });
   }),
 
   addFavorite: publicProcedure.input(z.string()).mutation(async ({ input }) => {
+    const restaurant = await prisma.restaurant.findUnique({
+      where: { id: input },
+    });
+
+    if (!restaurant) {
+      throw new Error("Restaurant not found");
+    }
+
     return await prisma.restaurant.update({
       where: { id: input },
-      data: { favorites: { increment: 1 } },
+      data: { isFavorite: !restaurant.isFavorite },
     });
   }),
 });

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import Restaurants from "@/components/Restaurants";
 import CategoryFilter from "@/components/CategoryFilter";
 import SearchBar from "@/components/SearchBar";
@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div className="justify-items-center min-h-screen pb-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col items-center">
+      <main className="w-full max-w-md mx-auto p-4">
         {/* 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
@@ -41,7 +41,7 @@ export default function Home() {
         <Restaurants category={selectedCategory} name={searchName} />
 
         {/* <!-- Bottom Navigation --> */}
-        <div className="fixed bottom-0 w-full max-w-md mx-auto bg-white shadow-lg flex justify-around p-3">
+        <div className="border-t-1 border-gray-100 fixed left-0 bottom-0 w-full bg-white shadow-lg flex justify-around p-4">
           <button className="flex flex-col items-center text-gray-500">
             <span>🏠</span>
             <span className="text-xs">홈</span>

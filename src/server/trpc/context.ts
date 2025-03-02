@@ -1,7 +1,6 @@
 import { inferAsyncReturnType } from '@trpc/server';
-import { NextRequest } from 'next/server';
 
-export function createContext(req?: NextRequest) {
+export function createContext() {
   return {}; // Add authentication, database connection, etc., here if needed
 }
 
