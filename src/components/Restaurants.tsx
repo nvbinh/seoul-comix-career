@@ -9,12 +9,12 @@ interface RestaurantProps {
   rating: number;
   rating_count: number;
   categoryId: string;
-  category: string;
+  category?: string;
   city: string;
   images: string[];
   price_range: string;
-  featuredId: string;
-  featured: string;
+  featuredId: string | null;
+  featured?: string;
   isFavorite: boolean;
 }
 
@@ -40,8 +40,15 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
   });
 
   useEffect(() => {
-    if (!queryLoading) {
-      setRestaurants(data);
+    if (data && !queryLoading) {
+      // setRestaurants(data);
+      setRestaurants(
+        data.map((res) => ({
+          ...res,
+          category: res.category?.value || "", // Convert category object to string
+          featured: res.featured?.text || "", // Convert featured object to string
+        }))
+      );
       setIsLoading(false);
     }
   }, [data, queryLoading]);

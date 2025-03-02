@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { z } from 'zod';
+import { StoreCategory } from "@prisma/client"; // Import the Prisma enum
 import { publicProcedure, router } from "./appRouter";
 
 const prisma = new PrismaClient();
@@ -17,7 +18,7 @@ export const restaurantRouter = router({
   .query(async ({ input }) => {
     return prisma.restaurant.findMany({
       where: {
-        category: { value: input.categoryValue },
+        category: { value: input.categoryValue as StoreCategory },
         ...(input.name ? { name: { contains: input.name, mode: 'insensitive' } } : {}),
       },
       include: {
