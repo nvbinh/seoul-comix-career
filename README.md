@@ -3,6 +3,11 @@ A full-stack **Next.js** application built with **tRPC, Prisma ORM, and PostgreS
 
 ## 🚀 **Project Overview**
 This project showcases a restaurant listing app with a **PostgreSQL** backend, **tRPC API**, and a **Next.js** frontend.
+The Main Features in the web application:
+1. **By default, displays all restaurants by default on the homepage.**
+2. **Category filter and search by restaurant name**
+3. **An Interactive image slider for a restaurant with multiple images**
+4. **Add to favorites**
 
 ## 🛠 **Backend Setup**
 1. **Install PostgreSQL on macOS** (via Homebrew):  
