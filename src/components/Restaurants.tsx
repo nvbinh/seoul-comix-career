@@ -40,7 +40,7 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
     isLoading: queryLoading,
     refetch,
   } = trpc.restaurant.getRestaurants.useQuery(queryParams, {
-    enabled: !category, // Only enable the query if category is provided
+    enabled: !category || !name, // Only enable the query if category and name is provided
   });
 
   const addFavoriteMutation = trpc.restaurant.addFavorite.useMutation({

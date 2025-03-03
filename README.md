@@ -1,41 +1,45 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## The github
+All the latest code in the branch `main`
 
-First, run the development server:
+## The backend setup
+1. Need a postgresql on your localhost.
+`brew install postgresql`
+`brew services start postgresql`
+2. Here using postgresql@14, then start postgresql server
+3. The config DATABASE localhost in `.env`
+`DATABASE_URL="postgresql://seoul:1234@localhost:5432/mydb?schema=public"`
+4. Migrate Prisma ORM with postgresql
+`npx prisma migrate dev --name` or `npx prisma migrate reset`
+5. Making mockup restaurant data
+`npx prisma db seed`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## The frontend setup
+1. Install npm packages with `yarn install`
+2. Start the server both backend trpc and frontend `yarn dev`
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Vercel Demo and Video Demo on my localhost
+1. Vercel demo
+[link](https://seoul-comix-career.vercel.app)
+This is not support postgresql cause of not support postgresql on Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Localhost demo video
+[link](as the video attached in the email)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## The 2 issues remaining
+1. In the first requirement:
+`TRPC: The backend should be built using TRPC. If you are using nextjs, use edge functions to serve trpc endpoint.` 
+src/app/api/trpc/[trpc]/route.ts
+export const runtime = 'edge';
+As my understand, it means we need to support runtime = 'edge' we need to config a DATABASE_URL with prefix prisma proxy with engineType = "dataproxy" in prisma schem
+But I do not have a server for deploy my postgresql database to work as a proxy server
 
-## Learn More
+2. I assume with few mismatch between database field and Figma UI data. In case you want me to update correctly please feedback to me, I will update it soon
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Project Structure
+## Basic Project Structure
 <pre>
 seoul-comix/
 │── prisma/                   # Prisma configuration
@@ -43,10 +47,9 @@ seoul-comix/
 │   ├── schema.prisma         # Prisma schema file
 │── src/                      # Main source code
 │   ├── components/           # Reusable React components
-│   ├── hooks/                # Custom React hooks
 │   ├── app/                  # Next.js app
 │   │   ├── api/              # API routes (for tRPC)
-│   │   ├── index.tsx         # Home page (restaurant list)
+│   │   ├── page.tsx          # Home page (restaurant list)
 │   ├── server/               # Backend logic
 │   │   ├── trpc/             # tRPC API handlers
 │   │   │   ├── context.ts    # tRPC context (authentication, etc.)
