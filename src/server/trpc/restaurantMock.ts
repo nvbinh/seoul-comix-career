@@ -2,7 +2,7 @@
 import { z } from 'zod';
 import { publicProcedure, router } from "./appRouter";
 
-const dataUrl = 'http://localhost:3000/data/restaurants.json';
+const dataUrl = 'https://seoul-comix-career.vercel.app/data/restaurants.json';
 
 async function fetchData() {
   const response = await fetch(dataUrl);
