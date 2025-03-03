@@ -8,7 +8,7 @@ export const trpc = createTRPCReact<AppRouter>();
 export const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: 'https://seoul-comix-career.vercel.app/api/trpc', // Ensure correct URL
+      url: 'https://seoul-comix-career.vercel.app//api/trpc', // Ensure correct URL
       async headers() {
         return {};
       },
