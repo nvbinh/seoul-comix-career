@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1",
+    "name": "Restaurant A",
+    "desc": "Description A",
+    "rating": 4.5,
+    "rating_count": 100,
+    "categoryId": "1",
+    "category": { "value": "Category A" },
+    "city": "City A",
+    "images": [
+      "https://picsum.photos/seed/picsum/400/300",
+      "https://picsum.photos/seed/picsum/400/300",
+      "https://picsum.photos/seed/picsum/400/300"
+    ],
+    "price_range": "10-20",
+    "featuredId": "1",
+    "featured": { "text": "Featured A" },
+    "isFavorite": false
+  },
+  {
+    "id": "2",
+    "name": "Restaurant B",
+    "desc": "Description B",
+    "rating": 4.0,
+    "rating_count": 50,
+    "categoryId": "2",
+    "category": { "value": "Category B" },
+    "city": "City B",
+    "images": ["https://picsum.photos/seed/picsum/400/300"],
+    "price_range": "20-30",
+    "featuredId": "2",
+    "featured": { "text": "Featured B" },
+    "isFavorite": true
+  }
+]

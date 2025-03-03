@@ -1,18 +1,15 @@
-import { publicProcedure, router } from './appRouter';
-import { z } from 'zod';
-import { restaurantRouter } from './restaurant'; 
+import { router } from './appRouter';
+// import { restaurantRouter } from './restaurant';
+import { restaurantMockRouter } from './restaurantMock';
+import dotenv from 'dotenv';
+// Load environment variables from .env file
+dotenv.config();
+
+console.log('NODE_ENV:', process.env.NODE_ENV); // Add this line for debugging
 
 export const appRouter = router({
-  hello: publicProcedure.input(z.object({ name: z.string().optional() }))
-    .query(({ input }) => {
-      return { message: `Hello, ${input.name ?? 'World'}!` };
-    }),
-
-  restaurant: restaurantRouter,
-  // hello: publicProcedure.query(() => {
-  //   console.log('🎯 tRPC Query Executed:', { message: 'Hello, World!' });
-  //   return { message: 'Hello, World!' };
-  // }),
+  // restaurant: process.env.NODE_ENV === 'production' ? restaurantMockRouter : restaurantRouter,
+  restaurant: restaurantMockRouter,
 });
 
 export type AppRouter = typeof appRouter;

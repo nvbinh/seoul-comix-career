@@ -1,6 +1,25 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+# 1. For Frontend development setup
+yarn install
+
+# Vercel demo without `postgresql` coz not support
+
+# 2. Setup database
+brew install postgresql
+brew services start postgresql
+
+/usr/local/opt/postgresql@14/bin/createuser -s -P seoul
+Enter password: 1234
+
+npx prisma migrate dev --name init
+Running mockup database
+npx prisma db seed
+
+
+# 2. For Backend development setup
+
 
 First, run the development server:
 

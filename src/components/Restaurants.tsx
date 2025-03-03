@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { trpc } from "@/utils/trpc";
 import Image from "next/image";
 import ImageSlider from "@/components/ImageSlider";
+interface Category {
+  value: string;
+}
+interface Featured {
+  text: string;
+}
 interface RestaurantProps {
   id: string;
   name: string;
@@ -15,6 +21,22 @@ interface RestaurantProps {
   price_range: string;
   featuredId: string | null;
   featured?: string;
+  isFavorite: boolean;
+}
+
+interface RestaurantProdProps {
+  id: string;
+  name: string;
+  desc: string;
+  rating: number;
+  rating_count: number;
+  categoryId: string;
+  category?: Category;
+  city: string;
+  images: string[];
+  price_range: string;
+  featuredId: string | null;
+  featured?: Featured;
   isFavorite: boolean;
 }
 
@@ -43,7 +65,7 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
     if (data && !queryLoading) {
       // setRestaurants(data);
       setRestaurants(
-        data.map((res) => ({
+        data.map((res: RestaurantProdProps) => ({
           ...res,
           category: res.category?.value || "", // Convert category object to string
           featured: res.featured?.text || "", // Convert featured object to string
@@ -88,7 +110,7 @@ const Restaurants: React.FC<{ category: string; name: string }> = ({
           </svg>
         </button>
         <div className="p-4">
-          <h2 className="text-orange-500 text-sm font-bold">
+          <h2 className="text-orange-500 text-sm font-bold flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
