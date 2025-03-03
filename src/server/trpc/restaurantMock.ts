@@ -1,23 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from 'zod';
 import { publicProcedure, router } from "./appRouter";
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-// Get the current file path
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const dataUrl = 'http://localhost:3000/data/restaurants.json';
 
-const dataFilePath = path.join(__dirname, '../data/restaurants.json');
-
-function readData() {
-  const data = fs.readFileSync(dataFilePath, 'utf-8');
-  return JSON.parse(data);
+async function fetchData() {
+  const response = await fetch(dataUrl);
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  return response.json();
 }
 
-function writeData(data: any) {
-  fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf-8');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function writeData(data: any) {
+  // Writing data back to the JSON file is not supported in a serverless environment like Vercel.
+  // You would need to use a database or another persistent storage solution.
+  throw new Error('Writing data is not supported in this environment');
 }
 
 export const restaurantMockRouter = router({
@@ -27,7 +26,7 @@ export const restaurantMockRouter = router({
       name: z.string().optional(),
     }))
     .query(async ({ input }) => {
-      const restaurants = readData();
+      const restaurants = await fetchData();
       return restaurants.filter((restaurant: any) => {
         const matchesCategory = input.categoryValue ? restaurant.category.value === input.categoryValue : true;
         const matchesName = input.name ? restaurant.name.toLowerCase().includes(input.name.toLowerCase()) : true;
@@ -36,7 +35,7 @@ export const restaurantMockRouter = router({
     }),
 
   addFavorite: publicProcedure.input(z.string()).mutation(async ({ input }) => {
-    const restaurants = readData();
+    const restaurants = await fetchData();
     const restaurant = restaurants.find((r: any) => r.id === input);
 
     if (!restaurant) {
@@ -44,7 +43,7 @@ export const restaurantMockRouter = router({
     }
 
     restaurant.isFavorite = !restaurant.isFavorite;
-    writeData(restaurants);
+    await writeData(restaurants);
 
     return restaurant;
   }),
