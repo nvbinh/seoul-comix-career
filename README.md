@@ -1,46 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Seoul Comix Career**  
+A full-stack **Next.js** application built with **tRPC, Prisma ORM, and PostgreSQL**.
 
-## The github
-All the latest code in the branch `main`
+## 🚀 **Project Overview**
+This project showcases a restaurant listing app with a **PostgreSQL** backend, **tRPC API**, and a **Next.js** frontend.
 
-## The backend setup
-1. Need a postgresql on your localhost.
-`brew install postgresql`
-`brew services start postgresql`
-2. Here using postgresql@14, then start postgresql server
-3. The config DATABASE localhost in `.env`
-`DATABASE_URL="postgresql://seoul:1234@localhost:5432/mydb?schema=public"`
-4. Migrate Prisma ORM with postgresql
-`npx prisma migrate dev --name` or `npx prisma migrate reset`
-5. Making mockup restaurant data
-`npx prisma db seed`
+## 🛠 **Backend Setup**
+1. **Install PostgreSQL on macOS** (via Homebrew):  
+   ```sh
+   brew install postgresql
+   brew services start postgresql
+   ```
+2. Ensure **PostgreSQL 14** or later is running.
+3. Configure your **local database connection** in `.env`:
+   ```ini
+   DATABASE_URL="postgresql://seoul:1234@localhost:5432/mydb?schema=public"
+   ```
+4. **Run database migrations** to set up the schema:  
+   ```sh
+   npx prisma migrate dev --name init
+   ```
+   or, if needed, reset the database:
+   ```sh
+   npx prisma migrate reset
+   ```
+5. **Seed the database** with mock restaurant data:
+   ```sh
+   npx prisma db seed
+   ```
 
-## The frontend setup
-1. Install npm packages with `yarn install`
-2. Start the server both backend trpc and frontend `yarn dev`
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Vercel Demo and Video Demo on my localhost
-1. Vercel demo
-[link](https://seoul-comix-career.vercel.app)
-This is not support postgresql cause of not support postgresql on Vercel
-
-2. Localhost demo video
-[link](as the video attached in the email)
-
-## The 2 issues remaining
-1. In the first requirement:
-`TRPC: The backend should be built using TRPC. If you are using nextjs, use edge functions to serve trpc endpoint.` 
-src/app/api/trpc/[trpc]/route.ts
-export const runtime = 'edge';
-As my understand, it means we need to support runtime = 'edge' we need to config a DATABASE_URL with prefix prisma proxy with engineType = "dataproxy" in prisma schem
-But I do not have a server for deploy my postgresql database to work as a proxy server
-
-2. I assume with few mismatch between database field and Figma UI data. In case you want me to update correctly please feedback to me, I will update it soon
+## 💻 **Frontend Setup**
+1. Install dependencies:
+   ```sh
+   yarn install
+   ```
+2. Start the **Next.js development server** (backend & frontend):
+   ```sh
+   yarn dev
+   ```
+3. Open [**localhost:3000**](http://localhost:3000) in your browser.
 
 
-## Basic Project Structure
-<pre>
+## 🌍 **Live Demo & Video**
+### **Vercel Deployment**
+🔗 [Live Demo (Vercel)](https://seoul-comix-career.vercel.app)  
+⚠ **Note:** Vercel does not support direct PostgreSQL connections, so the backend is unavailable in this demo.
+
+### **Localhost Video Demo**
+📹 *(Check the attached video in the email)*  
+
+
+## 🚧 **Remaining Issues**
+### **1️⃣ Edge Functions & tRPC Backend**
+- **Requirement:** The backend should be built using **tRPC** with **Edge Functions** (`runtime = 'edge'`).
+- **Problem:** Edge Functions require **Prisma Data Proxy** (`prisma://` connection), but this requires hosting PostgreSQL **remotely**.
+- **Solution:** To fully support Edge Functions, you need a **remote database** (e.g., Supabase, Neon, Railway, or Prisma Data Proxy).
+
+### **2️⃣ Database Field Mismatch**
+- Some **database fields** may not match the **Figma UI design**.  
+- Please provide feedback on necessary updates, and I will adjust the schema accordingly.
+
+
+## 📂 **Project Structure**
+```plaintext
 seoul-comix/
 │── prisma/                   # Prisma configuration
 │   ├── migrations/           # Database migrations
@@ -48,18 +69,18 @@ seoul-comix/
 │── src/                      # Main source code
 │   ├── components/           # Reusable React components
 │   ├── app/                  # Next.js app
-│   │   ├── api/              # API routes (for tRPC)
+│   │   ├── api/              # API routes (tRPC)
 │   │   ├── page.tsx          # Home page (restaurant list)
 │   ├── server/               # Backend logic
 │   │   ├── trpc/             # tRPC API handlers
-│   │   │   ├── context.ts    # tRPC context (authentication, etc.)
+│   │   │   ├── context.ts    # tRPC context (auth, etc.)
 │   │   │   ├── router.ts     # Main tRPC router
 │   │   │   ├── restaurant.ts # Restaurant API handlers
-│   ├── styles/               # Global styles (CSS, Tailwind, etc.)
+│   ├── styles/               # Global styles (Tailwind, CSS)
 │   ├── utils/                # Utility functions/helpers
 │── public/                   # Static assets (images, icons, etc.)
 │── .env                      # Environment variables (DB connection)
 │── package.json              # Dependencies and scripts
 │── next.config.js            # Next.js configuration
 │── tsconfig.json             # TypeScript configuration
-</pre>
+```
